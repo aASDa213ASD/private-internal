@@ -20,14 +20,14 @@ typedef LRESULT(CALLBACK* WNDPROC) (
 
 class Hooks {
 public:
-	Present		 present	   = nullptr;
+	Present present = nullptr;
 	ResizeBuffer resize_buffer = nullptr;
 
-	ID3D11Device*			device			   = nullptr;
-	ID3D11DeviceContext*	context			   = nullptr;
+	ID3D11Device* device = nullptr;
+	ID3D11DeviceContext* context = nullptr;
 	ID3D11RenderTargetView* render_target_view = nullptr;
 
-	HWND	window			 = nullptr;
+	HWND window = nullptr;
 	WNDPROC window_procedure = nullptr;
 	std::once_flag init_flag;
 	

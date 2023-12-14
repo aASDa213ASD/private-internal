@@ -107,7 +107,7 @@ void Hooks::install()
 {
 	if (kiero::init(kiero::RenderType::D3D11) == kiero::Status::Success)
 	{
-		kiero::bind(8,	reinterpret_cast<void**>(&present),	      onPresent);
+		kiero::bind(8, reinterpret_cast<void**>(&present), onPresent);
 		kiero::bind(13, reinterpret_cast<void**>(&resize_buffer), onResizeBuffer);
 	}
 }
