@@ -1,0 +1,11 @@
+#pragma once
+
+/* Objects */
+
+#define		LocalPlayer		0x223A0B8 //0x22118D8 // UPD // 0x51F52D0// 0x51dc530//0x51DA528 // 48 8B 3D ?? ?? ?? ?? 48 3B CF //0x51c6980//13.9 - 0x51945B8// 13.8 - 0x518aad8// 13.7 - 0x518eb00
+#define		HeroList		0x221C620 // 0x21F3FE0 // UPD // 0x21239e8 // 0x21219E8// 0x210def0 // 0x20DD8F0//13.8 - 0x20D0FA0// 13.7 -  0x20d5aa0
+#define		MinionList		0x221F590 // 0x21F6F40 // UPD //0x397e278// 0x397C278// 0x3968770//0x3938170//13.8-0x392B8A0
+#define		MinionListSize	0x10
+#define		MissileList		0x220C8C0 // updd  0x51DA600 //0x51c6a50// 13.? - 0x518ebb8
+#define		TurretList		0x2225FC0 // 0x21FD970 // UPD //0x51C8860 // 0x51b4d40// 13.?? -- 0x5184740// ??- 0x517d990
+#define		ObjectManager	0x217B230 // 0x21218C8 // 0x210ddc8//13.9- 0x20DD7C8 //13.8- 0x20D0E78 //13.7 - //0x20d5978
