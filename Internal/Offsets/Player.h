@@ -1,6 +1,6 @@
 #pragma once
 
-/* Player related addresses */
+/* Player related */
 #define		Index				0x10	/* | 13.24: 0x10	| */
 #define		Team				0x3c	/* | 13.24: 0x3c	| */
 #define		Zombie				0x38	/* | 13.24: 0x38	| */
@@ -30,6 +30,3 @@
 #define		AttackDamageBase	0x16B4	/* | 13.24:	0x16B4	| */
 #define		AttackDamageBonus	0x1620	/* | 13.24:	0x1620	| */
 #define		AbilityPower		0x15D0	/* | 13.24:	0x15D0	| */
-
-/* Player related functions */
-#define		fGetHealthBarPosition	0x7D77E0	/* | 13.24:	0x7D77E0 | */

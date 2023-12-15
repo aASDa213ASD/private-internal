@@ -148,6 +148,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Common\Globals.cpp" />
+    <ClCompile Include="Common\Spoof.cpp" />
     <ClCompile Include="Entry.cpp" />
     <ClCompile Include="Hooks.cpp" />
     <ClCompile Include="Library\kiero\kiero.cpp" />
@@ -164,9 +166,14 @@
     <ClCompile Include="Library\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="Library\imgui\imgui_tables.cpp" />
     <ClCompile Include="Library\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Library\vector\CRT.cpp" />
+    <ClCompile Include="Library\vector\Vector2.cpp" />
+    <ClCompile Include="Library\vector\Vector3.cpp" />
     <ClCompile Include="Library\VMTSmartHook.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common\Globals.h" />
+    <ClInclude Include="Common\Spoof.h" />
     <ClInclude Include="Hooks.h" />
     <ClInclude Include="Library\kiero\kiero.h" />
     <ClInclude Include="Library\kiero\minhook\include\MinHook.h" />
@@ -186,10 +193,19 @@
     <ClInclude Include="Library\imgui\imstb_rectpack.h" />
     <ClInclude Include="Library\imgui\imstb_textedit.h" />
     <ClInclude Include="Library\imgui\imstb_truetype.h" />
+    <ClInclude Include="Library\vector\CRT.h" />
+    <ClInclude Include="Library\vector\Vector.h" />
+    <ClInclude Include="Library\vector\Vector2.h" />
+    <ClInclude Include="Library\vector\Vector3.h" />
+    <ClInclude Include="Library\vector\Vector4.h" />
+    <ClInclude Include="Offsets\Functions.h" />
+    <ClInclude Include="Offsets\Objects.h" />
     <ClInclude Include="Offsets\Player.h" />
+    <ClInclude Include="Offsets\World.h" />
     <ClInclude Include="Overlay\Menu.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Common\_spoofer_stub.asm" />
     <None Include="Library\kiero\minhook\dll_resources\MinHook.def" />
   </ItemGroup>
   <ItemGroup>

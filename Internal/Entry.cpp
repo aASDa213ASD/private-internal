@@ -4,6 +4,8 @@
 #include <thread>
 
 #include "Hooks.h"
+#include "Common/Globals.h"
+#include "Common/Spoof.h"
 
 bool WINAPI HideThread(const HANDLE hThread) noexcept
 {
@@ -33,6 +35,9 @@ bool WINAPI HideThread(const HANDLE hThread) noexcept
 
 __declspec(safebuffers) static void WINAPI DllAttach([[maybe_unused]] LPVOID lp) noexcept
 {
+	Globals::Base = reinterpret_cast<std::uintptr_t>(::GetModuleHandle(nullptr));
+	Globals::Gadget = GetAddressFromSignature({ 0xff, 0x23 }, Globals::Base, 0xffffffffffff);
+
 	hooks.install();
 }
 
