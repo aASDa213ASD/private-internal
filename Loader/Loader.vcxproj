@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="China|Win32">
-      <Configuration>China</Configuration>
+    <ProjectConfiguration Include="Loader|Win32">
+      <Configuration>Loader</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="China|x64">
-      <Configuration>China</Configuration>
+    <ProjectConfiguration Include="Loader|x64">
+      <Configuration>Loader</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{adc6bc04-7410-4a94-b384-caf09176bff4}</ProjectGuid>
-    <RootNamespace>Internal</RootNamespace>
+    <ProjectGuid>{15360ddb-62c6-4297-9b3e-64a96066d85c}</ProjectGuid>
+    <RootNamespace>Loader</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='China|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Loader|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='China|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Loader|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='China|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Loader|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='China|x64'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Loader|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='China|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Loader|x64'">
     <OutDir>$(SolutionDir)\Build\</OutDir>
-    <IntDir>$(SolutionDir)\Build\Intermediates\Internal\</IntDir>
+    <IntDir>$(SolutionDir)\Build\Intermediates\Loader\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='China|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Loader|Win32'">
     <OutDir>$(SolutionDir)\Build\</OutDir>
-    <IntDir>$(SolutionDir)\Build\Intermediates\</IntDir>
+    <IntDir>$(SolutionDir)\Build\Intermediates\Loader\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='China|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Loader|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -65,13 +65,15 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='China|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Loader|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -80,26 +82,19 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Common\Globals.cpp" />
-    <ClCompile Include="Common\Spoof.cpp" />
-    <ClCompile Include="Entry.cpp" />
-    <ClCompile Include="Hooks.cpp" />
-    <ClCompile Include="Library\kiero\kiero.cpp" />
-    <ClCompile Include="Library\kiero\minhook\src\buffer.c" />
-    <ClCompile Include="Library\kiero\minhook\src\hde\hde32.c" />
-    <ClCompile Include="Library\kiero\minhook\src\hde\hde64.c" />
-    <ClCompile Include="Library\kiero\minhook\src\hook.c" />
-    <ClCompile Include="Library\kiero\minhook\src\trampoline.c" />
+    <ClCompile Include="DLC\DLC.cpp" />
+    <ClCompile Include="Interface\GUI.cpp" />
     <ClCompile Include="Library\imgui\imgui.cpp" />
     <ClCompile Include="Library\imgui\imgui_demo.cpp" />
     <ClCompile Include="Library\imgui\imgui_draw.cpp" />
@@ -108,26 +103,14 @@
     <ClCompile Include="Library\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="Library\imgui\imgui_tables.cpp" />
     <ClCompile Include="Library\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Library\vector\CRT.cpp" />
-    <ClCompile Include="Library\vector\Vector2.cpp" />
-    <ClCompile Include="Library\vector\Vector3.cpp" />
-    <ClCompile Include="Library\VMTSmartHook.h" />
-    <ClCompile Include="Library\VMT\VMTHook.cpp" />
-    <ClCompile Include="Common\Player.cpp" />
+    <ClCompile Include="Common\Loader.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common\Globals.h" />
-    <ClInclude Include="Common\Spoof.h" />
-    <ClInclude Include="Hooks.h" />
-    <ClInclude Include="Library\kiero\kiero.h" />
-    <ClInclude Include="Library\kiero\minhook\include\MinHook.h" />
-    <ClInclude Include="Library\kiero\minhook\src\buffer.h" />
-    <ClInclude Include="Library\kiero\minhook\src\hde\hde32.h" />
-    <ClInclude Include="Library\kiero\minhook\src\hde\hde64.h" />
-    <ClInclude Include="Library\kiero\minhook\src\hde\pstdint.h" />
-    <ClInclude Include="Library\kiero\minhook\src\hde\table32.h" />
-    <ClInclude Include="Library\kiero\minhook\src\hde\table64.h" />
-    <ClInclude Include="Library\kiero\minhook\src\trampoline.h" />
+    <ClInclude Include="DLC\DLC.h" />
+    <ClInclude Include="DLC\LazyImport.h" />
+    <ClInclude Include="Interface\ImGui.h" />
+    <ClInclude Include="Interface\GUI.h" />
     <ClInclude Include="Library\imgui\imconfig.h" />
     <ClInclude Include="Library\imgui\imgui.h" />
     <ClInclude Include="Library\imgui\imgui_impl_dx11.h" />
@@ -137,26 +120,7 @@
     <ClInclude Include="Library\imgui\imstb_rectpack.h" />
     <ClInclude Include="Library\imgui\imstb_textedit.h" />
     <ClInclude Include="Library\imgui\imstb_truetype.h" />
-    <ClInclude Include="Library\vector\CRT.h" />
-    <ClInclude Include="Library\vector\Vector.h" />
-    <ClInclude Include="Library\vector\Vector2.h" />
-    <ClInclude Include="Library\vector\Vector3.h" />
-    <ClInclude Include="Library\vector\Vector4.h" />
-    <ClInclude Include="Library\VMT\OnProcessSpell.h" />
-    <ClInclude Include="Library\VMT\VMTHook.h" />
-    <ClInclude Include="Offsets\Functions.h" />
-    <ClInclude Include="Offsets\Objects.h" />
-    <ClInclude Include="Offsets\Player.h" />
-    <ClInclude Include="Offsets\World.h" />
-    <ClInclude Include="Overlay\Menu.h" />
-    <ClInclude Include="Common\Player.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Common\_spoofer_stub.asm" />
-    <None Include="Library\kiero\minhook\dll_resources\MinHook.def" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Library\kiero\minhook\dll_resources\MinHook.rc" />
+    <ClInclude Include="Common\Loader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

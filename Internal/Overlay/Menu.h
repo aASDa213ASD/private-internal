@@ -1,12 +1,14 @@
 #pragma once
 
 #include "../../Library/imgui/imgui.h"
+#include "Common/Globals.h"
 
 class Menu {
 	ImGuiWindowFlags window_flags = 0;
 	ImVec2 menu_size = ImVec2(150.0f, 140.0f);
 
 public:
+	char spells[256] = "";
 	bool is_opened = true;
 
 	void aquire_styles()
@@ -79,18 +81,19 @@ public:
 	}
 
 	void render()
-	{
+	{	
 		if (ImGui::Begin("menu", nullptr, window_flags))
 		{
-			if (ImGui::BeginMenu("Menu 1"))
+			if (ImGui::BeginMenu("Memory"))
 			{
-				ImGui::Text("0");
+				ImGui::Text("Base: %llX", globals::base);
+				ImGui::Text("Gadget: %llX", globals::gadget);
 				ImGui::EndMenu();
 			}
 
-			if (ImGui::BeginMenu("Menu 2"))
+			if (ImGui::BeginMenu("Spells"))
 			{
-				ImGui::Text("1");
+				ImGui::TextUnformatted(spells);
 				ImGui::EndMenu();
 			}
 

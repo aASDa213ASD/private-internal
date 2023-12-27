@@ -5,16 +5,33 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Internal", "Internal\Internal.vcxproj", "{ADC6BC04-7410-4A94-B384-CAF09176BFF4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Loader", "Loader\Loader.vcxproj", "{15360DDB-62C6-4297-9B3E-64A96066D85C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		China|x64 = China|x64
 		China|x86 = China|x86
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ADC6BC04-7410-4A94-B384-CAF09176BFF4}.China|x64.ActiveCfg = China|x64
 		{ADC6BC04-7410-4A94-B384-CAF09176BFF4}.China|x64.Build.0 = China|x64
 		{ADC6BC04-7410-4A94-B384-CAF09176BFF4}.China|x86.ActiveCfg = China|Win32
 		{ADC6BC04-7410-4A94-B384-CAF09176BFF4}.China|x86.Build.0 = China|Win32
+		{ADC6BC04-7410-4A94-B384-CAF09176BFF4}.Debug|x64.ActiveCfg = China|x64
+		{ADC6BC04-7410-4A94-B384-CAF09176BFF4}.Debug|x86.ActiveCfg = China|Win32
+		{ADC6BC04-7410-4A94-B384-CAF09176BFF4}.Release|x64.ActiveCfg = China|x64
+		{ADC6BC04-7410-4A94-B384-CAF09176BFF4}.Release|x86.ActiveCfg = China|Win32
+		{15360DDB-62C6-4297-9B3E-64A96066D85C}.China|x64.ActiveCfg = Loader|x64
+		{15360DDB-62C6-4297-9B3E-64A96066D85C}.China|x64.Build.0 = Loader|x64
+		{15360DDB-62C6-4297-9B3E-64A96066D85C}.China|x86.ActiveCfg = Loader|Win32
+		{15360DDB-62C6-4297-9B3E-64A96066D85C}.Debug|x64.ActiveCfg = Loader|x64
+		{15360DDB-62C6-4297-9B3E-64A96066D85C}.Debug|x86.ActiveCfg = Loader|Win32
+		{15360DDB-62C6-4297-9B3E-64A96066D85C}.Release|x64.ActiveCfg = Loader|x64
+		{15360DDB-62C6-4297-9B3E-64A96066D85C}.Release|x86.ActiveCfg = Loader|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
