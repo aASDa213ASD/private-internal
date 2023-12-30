@@ -19,7 +19,7 @@
 - [ ] **Evade**
 - [ ] **Skillshot aimbot** / **Prediction**
 - [ ] **Orbwalker**
-- [ ] **Skin Changer**
+- [x] **Skin Changer**
 - [ ] **Visual Awareness**
 
 <br>
@@ -32,9 +32,9 @@
 - [x] **Skeleton DLL**
 
 ### Structure
-- [ ] **Each script as a separate module**
-- [ ] **Global Variables space**
-- [ ] **Different getter methods for player class**
+- [x] **Each script as a separate module**
+- [x] **Global Variables space**
+- [x] **Different getter methods for player class**
 
 ### Quality of life
 - [ ] **Smart Log/Debug system**
