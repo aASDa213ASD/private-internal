@@ -1,11 +1,17 @@
 #pragma once
 
 #include "../../Library/imgui/imgui.h"
-#include "Common/Globals.h"
+#include "../Offsets/Objects.h"
+#include "Common/Memory.h"
+
+#include "../../Features/Featurectl.h"
+#include "../../Features/SkinChanger/SkinChanger.h"
+#include "../Features/SkinChanger/Database/SkinDatabase.h"
 
 class Menu {
 	ImGuiWindowFlags window_flags = 0;
 	ImVec2 menu_size = ImVec2(150.0f, 140.0f);
+	std::int32_t current_combo_skin_index{ 0 };
 
 public:
 	char spells[256] = "";
@@ -82,18 +88,72 @@ public:
 
 	void render()
 	{	
+		static const auto vector_getter_skin = [](void* vec, std::int32_t idx, const char** out_text) noexcept {
+			const auto& vector{ *static_cast<std::vector<SkinDatabase::skin_info>*>(vec) };
+			if (idx < 0 || idx > static_cast<std::int32_t>(vector.size())) return false;
+			*out_text = idx == 0 ? "Default" : vector.at(idx - 1).skin_name.c_str();
+			return true;
+		};
+
 		if (ImGui::Begin("menu", nullptr, window_flags))
 		{
-			if (ImGui::BeginMenu("Memory"))
+			if (ImGui::BeginMenu("Skins"))
 			{
-				ImGui::Text("Base: %llX", globals::base);
-				ImGui::Text("Gadget: %llX", globals::gadget);
+				if (Feature* feature = featurectl.get_feature("Skins"))
+					if (auto skin_changer = dynamic_cast<SkinChanger*>(feature))
+						if (skin_changer)
+						{
+							auto& values = skin_changer->get_skins(LocalPlayer);
+							if (ImGui::Combo(
+								"Skin", &current_combo_skin_index, vector_getter_skin,
+								static_cast<void*>(&values), values.size() + 1)
+							) {
+								if (current_combo_skin_index > 0) {
+									skin_changer->change_skin(
+										values[current_combo_skin_index - 1].model_name,
+										values[current_combo_skin_index - 1].skin_id,
+										LocalPlayer
+									);
+								}
+							}
+						}
+
 				ImGui::EndMenu();
 			}
 
-			if (ImGui::BeginMenu("Spells"))
+			ImGui::Separator();
+
+			if (ImGui::BeginMenu("Debug"))
 			{
-				ImGui::TextUnformatted(spells);
+				if (ImGui::BeginMenu("Memory Viewer"))
+				{
+					ImGui::Text("Base: %llX", memory.base);
+					ImGui::Text("Gadget: %llX", memory.gadget);
+
+					ImGui::EndMenu();
+				}
+
+				if (ImGui::BeginMenu("Players"))
+				{
+					ImGui::Text("Allies:");
+					ImGui::Separator();
+					for (auto& ally : memory.allies)
+					{
+						ImGui::Text("%s (%llX)", ally.hero_name().c_str(), ally.address());
+						ImGui::Separator();
+					}
+
+					ImGui::Text("Enemies:");
+					ImGui::Separator();
+					for (auto& enemy : memory.enemies)
+					{
+						ImGui::Text("%s (%llX)", enemy.hero_name().c_str(), enemy.address());
+						ImGui::Separator();
+					}
+
+					ImGui::EndMenu();
+				}
+
 				ImGui::EndMenu();
 			}
 

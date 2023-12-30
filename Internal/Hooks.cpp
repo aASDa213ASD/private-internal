@@ -6,6 +6,7 @@
 #include "Library/imgui/imgui_impl_dx11.h"
 
 #include "Overlay/Menu.h"
+#include "Overlay/Render.h"
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -32,6 +33,9 @@ HRESULT __stdcall onPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
+
+	render.overlay();
+	render.text(Vector2(1000, 1000), render.spell, ImColor(1.0f, 1.0f, 1.0f, 1.0f), false, true);
 
 	if (menu.is_opened)
 		menu.render();

@@ -1,12 +1,12 @@
 #pragma once
 
-#include <iostream>
+#include <string>
 
 #include "../Library/vector/Vector.h"
 
+/*
 class Player {
 public:
-	/*int danger_level; */
 	//int target_priority;
 
 	Player(uintptr_t pointer);
@@ -58,4 +58,24 @@ public:
 	std::vector<Vector3> NextNode(std::vector<Vector3> points);
 	//vector<buff> buffs = {};
 
+};
+*/
+
+class Player {
+private:
+	uintptr_t   _pointer;
+	std::string _name;
+	std::string _hero_name;
+	int			_team;
+
+public:
+	Player(uintptr_t pointer);
+
+	uintptr_t	address();
+	std::string name();
+	std::string hero_name();
+	float		health();
+	int			team();
+	bool		is_enemy_to(Player player);
+	bool		is_ally_to(Player player);
 };

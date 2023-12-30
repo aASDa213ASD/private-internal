@@ -24,7 +24,7 @@
 #define		Gold				0x2148	/* | 13.24: 0x2148	| */
 #define		TotalGold			0x2130	/* | 13.24:	0x2130	| */
 #define		CombatType			0x2670	/* | 13.24: 0x2670	| */
-#define		Direction			0x2190	/* | 13.24:	0x2190	| */
+#define		Direction_2			0x2190	/* | 13.24:	0x2190	| */
 #define		Spellbook			0x2A38	/* | 13.24:	0x2A38	| */
 #define		SpellSlots			0x6d0	/* | 13.24:	0x6d0	| */
 #define		AttackDamageBase	0x16B4	/* | 13.24:	0x16B4	| */

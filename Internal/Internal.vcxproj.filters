@@ -66,9 +66,6 @@
     <ClCompile Include="Library\kiero\kiero.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Globals.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Library\vector\Vector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -85,6 +82,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Library\VMT\VMTHook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\Featurectl.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\Evade\Evade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\SkinChanger\SkinChanger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\SkinChanger\Database\SkinDatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Features\SkinChanger\Riot\GameClasses.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Overlay\Render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,9 +179,6 @@
     <ClInclude Include="Offsets\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Spoof.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -185,10 +200,40 @@
     <ClInclude Include="Common\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Library\VMT\OnProcessSpell.h">
+    <ClInclude Include="Library\VMT\VMTHook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Library\VMT\VMTHook.h">
+    <ClInclude Include="Features\Feature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Evade\Evade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\SkinChanger\SkinChanger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\SkinChanger\Database\SkinDatabase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\SkinChanger\Riot\GameClasses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Offsets\Skins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\FNVHash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Encryption.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Overlay\Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\Evade\Spell\Spell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

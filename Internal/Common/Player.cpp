@@ -2,55 +2,55 @@
 
 #include "../Offsets/Player.h"
 
-void Player::getName()
+Player::Player(uintptr_t pointer = NULL)
 {
-	for (int i = 0; i < 15; i++) {
-		this->name[i] = *reinterpret_cast<char*>(this->ptr + Name + i);
+	if (pointer)
+	{
+		_pointer   = pointer;
+		_name      = *reinterpret_cast<std::string*>(pointer + Name);
+		_hero_name = *reinterpret_cast<std::string*>(pointer + HeroName);
+		_team      = *reinterpret_cast<int*>(pointer + Team);
+	}
+	else
+	{
+		_pointer   = pointer;
+		_name      = "Unnamed";
+		_hero_name = "Unknown";
+		_team	   = -1;
 	}
 }
 
-void Player::getChampionName()
+uintptr_t Player::address()
 {
-	for (int i = 0; i < 35; i++) {
-		this->champion_name[i] = *reinterpret_cast<char*> (this->ptr + HeroName + i);
-	}
-}
-										//void getPointer(); Собсна нахуя
-float Player::getHealth()
-{
-	this->health = *reinterpret_cast<float*>(this->ptr + Health);
-	return this->health;
+	return this->_pointer;
 }
 
-float Player::getMana()
+std::string Player::name()
 {
-	this->mana = *reinterpret_cast<float*>(this->ptr + Mana);
-	return this->mana;
+	return this->_name;
 }
 
-Vector3 Player::getPosition()
+std::string Player::hero_name()
 {
-	this->position = *reinterpret_cast<Vector3*>(this->ptr + Position);
-	return this->position;
+	return this->_hero_name;
 }
 
-Vector2 Player::getDirection()
-{	
-	// Position.x + (Velocity * direction.x * time)
-	return {};
-} 
-
-void Player::initialize()
+float Player::health()
 {
-	this->mana = this->getMana();
-	this->health = this->getHealth();
-	this->position = this->getPosition();
-	this->direction = this->getDirection();
-	this->getName();
-	this->getChampionName();
+	return *reinterpret_cast<float*>(_pointer + Health);
 }
 
-Player::Player(uintptr_t pointer)
+int Player::team()
 {
-	this->ptr = pointer;
+	return this->_team;
+}
+
+bool Player::is_enemy_to(Player player)
+{
+	return (_team != player.team());
+}
+
+bool Player::is_ally_to(Player player)
+{
+	return (_team == player.team());
 }

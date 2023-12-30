@@ -90,9 +90,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Common\Globals.cpp" />
+    <ClCompile Include="Common\Memory.cpp" />
     <ClCompile Include="Common\Spoof.cpp" />
     <ClCompile Include="Entry.cpp" />
+    <ClCompile Include="Features\Evade\Evade.cpp" />
+    <ClCompile Include="Features\Featurectl.h" />
+    <ClCompile Include="Features\SkinChanger\Riot\GameClasses.cpp" />
+    <ClCompile Include="Features\SkinChanger\SkinChanger.cpp" />
+    <ClCompile Include="Features\SkinChanger\Database\SkinDatabase.cpp" />
     <ClCompile Include="Hooks.cpp" />
     <ClCompile Include="Library\kiero\kiero.cpp" />
     <ClCompile Include="Library\kiero\minhook\src\buffer.c" />
@@ -114,11 +119,20 @@
     <ClCompile Include="Library\VMTSmartHook.h" />
     <ClCompile Include="Library\VMT\VMTHook.cpp" />
     <ClCompile Include="Common\Player.cpp" />
+    <ClCompile Include="Overlay\Render.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common\Globals.h" />
+    <ClInclude Include="Common\Memory.h" />
     <ClInclude Include="Common\Spoof.h" />
+    <ClInclude Include="Features\Evade\Evade.h" />
+    <ClInclude Include="Features\Evade\Spell\Spell.h" />
+    <ClInclude Include="Features\Feature.h" />
+    <ClInclude Include="Features\SkinChanger\Riot\GameClasses.h" />
+    <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
+    <ClInclude Include="Features\SkinChanger\Database\SkinDatabase.h" />
     <ClInclude Include="Hooks.h" />
+    <ClInclude Include="Library\Encryption.h" />
+    <ClInclude Include="Library\FNVHash.h" />
     <ClInclude Include="Library\kiero\kiero.h" />
     <ClInclude Include="Library\kiero\minhook\include\MinHook.h" />
     <ClInclude Include="Library\kiero\minhook\src\buffer.h" />
@@ -142,14 +156,15 @@
     <ClInclude Include="Library\vector\Vector2.h" />
     <ClInclude Include="Library\vector\Vector3.h" />
     <ClInclude Include="Library\vector\Vector4.h" />
-    <ClInclude Include="Library\VMT\OnProcessSpell.h" />
     <ClInclude Include="Library\VMT\VMTHook.h" />
     <ClInclude Include="Offsets\Functions.h" />
     <ClInclude Include="Offsets\Objects.h" />
     <ClInclude Include="Offsets\Player.h" />
+    <ClInclude Include="Offsets\Skins.h" />
     <ClInclude Include="Offsets\World.h" />
     <ClInclude Include="Overlay\Menu.h" />
     <ClInclude Include="Common\Player.h" />
+    <ClInclude Include="Overlay\Render.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Common\_spoofer_stub.asm" />

@@ -20,5 +20,5 @@
 #define		fGetAttackDelay			0x3d65c0	/* | 13.24: 0x3d65c0	| */
 #define		fGetAttackCastDelay		0x3d64c0	/* | 13.24: 0x3d64c0	| */
 
-/* VMT Hook Essentials */
+/* VMT Hook Essential */
 #define		OnProcessSpellCast		0x1391e9	/* | 13.24: 0x1391e9	| */
