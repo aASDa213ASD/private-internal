@@ -1,14 +1,10 @@
 #include "Evade.h"
 
-#include <sstream>
-#include <iomanip>
-
 #include "../../Common/Memory.h"
 #include "../../Library/VMT/VMTHook.h"
 #include "../../Offsets/Objects.h"
-#include "Spell/Spell.h"
-
 #include "../../Overlay/Render.h"
+#include "Spell/Spell.h"
 
 void Evade::load()
 {
@@ -60,7 +56,7 @@ void __fastcall on_cast(void* this_ptr, void* state, void* spell_cast_info) noex
 	if (current_spell.name.find("Attack") != std::string::npos)
 		return fn(this_ptr, state, (void*)spell_cast_info);
 	
-	render.spell = current_spell.name;
+	// render.spell = current_spell.name;
 	
 	return fn(this_ptr, state, spell_cast_info);
 }

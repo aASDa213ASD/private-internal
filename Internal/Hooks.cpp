@@ -35,7 +35,7 @@ HRESULT __stdcall onPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	ImGui::NewFrame();
 
 	render.overlay();
-	render.text(Vector2(1000, 1000), render.spell, ImColor(1.0f, 1.0f, 1.0f, 1.0f), false, true);
+	//render.text(Vector2(1000, 1000), render.spell, ImColor(1.0f, 1.0f, 1.0f, 1.0f), false, true);
 
 	if (menu.is_opened)
 		menu.render();
