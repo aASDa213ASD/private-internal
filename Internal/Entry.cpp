@@ -9,6 +9,7 @@
 #include "Features/Evade/Evade.h"
 #include "Offsets/Objects.h"
 #include "Features/SkinChanger/SkinChanger.h"
+#include "Features/Visuals/Visuals.h"
 
 bool WINAPI HideThread(const HANDLE hThread) noexcept
 {
@@ -40,8 +41,9 @@ __declspec(safebuffers) static void WINAPI DllAttach([[maybe_unused]] LPVOID lp)
 {
 	memory.initialize();
 
-	featurectl.load_feature(std::make_unique<Evade>());
+	//featurectl.load_feature(std::make_unique<Evade>());
 	featurectl.load_feature(std::make_unique<SkinChanger>());
+	//featurectl.load_feature(std::make_unique<Visuals>());
 
 	hooks.install();
 
@@ -52,7 +54,7 @@ __declspec(safebuffers) BOOL APIENTRY DllMain(const HMODULE hModule, const DWORD
 {
 	DisableThreadLibraryCalls(hModule);
 	HideThread(hModule);
-
+	
 	if (reason == DLL_PROCESS_ATTACH)
 	{
 		::_beginthreadex(

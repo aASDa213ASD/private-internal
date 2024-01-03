@@ -6,7 +6,9 @@
 
 #include "../../Features/Featurectl.h"
 #include "../../Features/SkinChanger/SkinChanger.h"
+#include "../../Features/Visuals/Visuals.h"
 #include "../Features/SkinChanger/Database/SkinDatabase.h"
+#include "../../Common/Player/PlayerSpell.h"
 
 class Menu {
 	ImGuiWindowFlags window_flags = 0;
@@ -95,31 +97,37 @@ public:
 			return true;
 		};
 
+		auto skin_changer = dynamic_cast<SkinChanger*>(featurectl.get_feature("Skins"));
+		auto visuals = dynamic_cast<Visuals*>(featurectl.get_feature("Visuals"));
+
 		if (ImGui::Begin("menu", nullptr, window_flags))
 		{
-			if (ImGui::BeginMenu("Skins"))
-			{
-				if (Feature* feature = featurectl.get_feature("Skins"))
-					if (auto skin_changer = dynamic_cast<SkinChanger*>(feature))
-						if (skin_changer)
-						{
-							auto& values = skin_changer->get_skins(LocalPlayer);
-							if (ImGui::Combo(
-								"Skin", &current_combo_skin_index, vector_getter_skin,
-								static_cast<void*>(&values), values.size() + 1)
-							) {
-								if (current_combo_skin_index > 0) {
-									skin_changer->change_skin(
-										values[current_combo_skin_index - 1].model_name,
-										values[current_combo_skin_index - 1].skin_id,
-										LocalPlayer
-									);
-								}
-							}
+			if (skin_changer)
+				if (ImGui::BeginMenu("Skins"))
+				{
+					auto& values = skin_changer->get_skins(LocalPlayer);
+					if (ImGui::Combo(
+						"Skin", &current_combo_skin_index, vector_getter_skin,
+						static_cast<void*>(&values), values.size() + 1)
+						) {
+						if (current_combo_skin_index > 0) {
+							skin_changer->change_skin(
+								values[current_combo_skin_index - 1].model_name,
+								values[current_combo_skin_index - 1].skin_id,
+								LocalPlayer
+							);
 						}
+					}
 
-				ImGui::EndMenu();
-			}
+					ImGui::EndMenu();
+				}
+
+			if (visuals)
+				if (ImGui::BeginMenu("Visuals"))
+				{
+					ImGui::Checkbox("Attack Range", &visuals->draw_attack_range);
+					ImGui::EndMenu();
+				}
 
 			ImGui::Separator();
 
@@ -129,7 +137,7 @@ public:
 				{
 					ImGui::Text("Base: %llX", memory.base);
 					ImGui::Text("Gadget: %llX", memory.gadget);
-
+					ImGui::Text("Viewport: %u x %u", memory.viewport_width, memory.viewport_height);
 					ImGui::EndMenu();
 				}
 
@@ -151,6 +159,19 @@ public:
 						ImGui::Separator();
 					}
 
+					ImGui::EndMenu();
+				}
+
+				if (ImGui::BeginMenu("Spells"))
+				{
+					Player& local = memory.allies.front();
+					ImGui::Text("%s spells (%i):", local.hero_name(), local.spells.size());
+					for (PlayerSpell& spell : local.spells)
+					{
+						ImGui::Text("%s", spell.name.c_str());
+						ImGui::Text("Type: %s", spell.type.c_str());
+						ImGui::Separator();
+					}
 					ImGui::EndMenu();
 				}
 

@@ -35,7 +35,9 @@ HRESULT __stdcall onPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	ImGui::NewFrame();
 
 	render.overlay();
-	//render.text(Vector2(1000, 1000), render.spell, ImColor(1.0f, 1.0f, 1.0f, 1.0f), false, true);
+
+	if (hooks.visuals)
+		hooks.visuals->update();
 
 	if (menu.is_opened)
 		menu.render();
@@ -77,6 +79,7 @@ HRESULT onResizeBuffer(IDXGISwapChain* pSwapChain, UINT BufferCount, UINT Width,
 	};
 
 	hooks.context->RSSetViewports(1, &vp);
+
 	return hr;
 }
 
@@ -105,6 +108,8 @@ void Hooks::initialize(IDXGISwapChain* pSwapChain)
 			menu.aquire_styles();
 		}
 	}
+
+	visuals = dynamic_cast<Visuals*>(featurectl.get_feature("Visuals"));
 }
 
 void Hooks::install()

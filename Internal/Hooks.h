@@ -5,6 +5,8 @@
 #include <dxgi.h>
 #include <mutex>
 
+#include "Features/Visuals/Visuals.h"
+
 typedef HRESULT(__stdcall* Present) (
 	IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags
 );
@@ -30,6 +32,8 @@ public:
 	HWND window = nullptr;
 	WNDPROC window_procedure = nullptr;
 	std::once_flag init_flag;
+
+	Visuals* visuals;
 	
 	void install();
 	void uninstall();

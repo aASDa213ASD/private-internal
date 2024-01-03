@@ -3,11 +3,14 @@
 #include "Spoof.h"
 #include "../Offsets/Objects.h"
 #include "../Offsets/Player.h"
+#include "../Offsets/World.h"
 
 void Memory::initialize(bool with_players)
 {
 	base   = reinterpret_cast<std::uintptr_t>(::GetModuleHandle(nullptr));
 	gadget = GetAddressFromSignature({ 0xff, 0x23 }, base, 0xffffffffffff);
+
+	get_viewport_resolution();
 
 	if (with_players)
 	{
@@ -25,5 +28,17 @@ void Memory::initialize(bool with_players)
 			else
 				allies.emplace_back(Player(player_address));
 		}
+
+		for (auto& ally : allies)
+		{
+			ally.load_spelldb();
+		}
 	}
+}
+
+void Memory::get_viewport_resolution()
+{
+	uintptr_t renderer = *reinterpret_cast<uintptr_t*>(base + oRenderer);
+	viewport_width = *reinterpret_cast<uint32_t*>(renderer + oRendererWidth);
+	viewport_height = *reinterpret_cast<uint32_t*>(renderer + oRendererHeight);
 }

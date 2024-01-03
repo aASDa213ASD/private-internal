@@ -29,4 +29,5 @@
 #define		SpellSlots			0x6d0	/* | 13.24:	0x6d0	| */
 #define		AttackDamageBase	0x16B4	/* | 13.24:	0x16B4	| */
 #define		AttackDamageBonus	0x1620	/* | 13.24:	0x1620	| */
+#define		AttackRange			0x16FC	/* | 13.24: 0x16FC	| */
 #define		AbilityPower		0x15D0	/* | 13.24:	0x15D0	| */

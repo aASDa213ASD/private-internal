@@ -1,10 +1,14 @@
 #include "Evade.h"
 
+#include <sstream>
+#include <iomanip>
+
 #include "../../Common/Memory.h"
 #include "../../Library/VMT/VMTHook.h"
 #include "../../Offsets/Objects.h"
 #include "../../Overlay/Render.h"
 #include "Spell/Spell.h"
+#include <format>
 
 void Evade::load()
 {
@@ -21,6 +25,12 @@ void __fastcall on_cast(void* this_ptr, void* state, void* spell_cast_info) noex
 
 	if (!spell_cast_info)
 		return fn(this_ptr, state, spell_cast_info);
+
+	/*
+	std::stringstream ss;
+	ss << std::hex << "This Pointer: 0x" << (reinterpret_cast<uint64_t>(this_ptr) - 0x11b8);
+	render.spell = ss.str();
+	*/
 
 	Spell current_spell;
 	current_spell.start_pos = *reinterpret_cast<Vector3*>((uint64_t)spell_cast_info + SpellCastStart);
@@ -56,7 +66,26 @@ void __fastcall on_cast(void* this_ptr, void* state, void* spell_cast_info) noex
 	if (current_spell.name.find("Attack") != std::string::npos)
 		return fn(this_ptr, state, (void*)spell_cast_info);
 	
-	// render.spell = current_spell.name;
+	for (auto& ally : memory.allies)
+	{
+		if (ally.address() == (reinterpret_cast<uint64_t>(this_ptr) - 0x11b8))
+		{
+			render.spell = std::format("Spell {} casted by {}", current_spell.name, ally.hero_name());
+
+			for (auto& spell : ally.spells)
+			{
+				if (current_spell.name == spell.name)
+				{
+					/* Getting data from SpellDB of a player and assign to current_spell */
+					current_spell.missile_width = spell.missile_width;
+					/* Adding current_spell to active_missiles vector */
+					memory.active_missiles.push_back(current_spell);
+				}
+			}
+
+			break;
+		}
+	}
 	
 	return fn(this_ptr, state, spell_cast_info);
 }
@@ -89,3 +118,4 @@ void Evade::thread_on_process_spell()
 		remote_memory, 0, &thread_id
 	);
 }
+

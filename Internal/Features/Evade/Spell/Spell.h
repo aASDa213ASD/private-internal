@@ -23,6 +23,7 @@ public:
 	float cast_time;
 	float cast_start;
 	float cast_end;
+	float missile_width;
 
 	Vector3 position;
 	Vector3 start_pos;

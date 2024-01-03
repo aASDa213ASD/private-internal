@@ -98,6 +98,7 @@
     <ClCompile Include="Features\SkinChanger\Riot\GameClasses.cpp" />
     <ClCompile Include="Features\SkinChanger\SkinChanger.cpp" />
     <ClCompile Include="Features\SkinChanger\Database\SkinDatabase.cpp" />
+    <ClCompile Include="Features\Visuals\Visuals.cpp" />
     <ClCompile Include="Hooks.cpp" />
     <ClCompile Include="Library\kiero\kiero.cpp" />
     <ClCompile Include="Library\kiero\minhook\src\buffer.c" />
@@ -118,21 +119,25 @@
     <ClCompile Include="Library\vector\Vector3.cpp" />
     <ClCompile Include="Library\VMTSmartHook.h" />
     <ClCompile Include="Library\VMT\VMTHook.cpp" />
-    <ClCompile Include="Common\Player.cpp" />
+    <ClCompile Include="Common\Player\Player.cpp" />
     <ClCompile Include="Overlay\Render.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Memory.h" />
+    <ClInclude Include="Common\Player\PlayerSpell.h" />
     <ClInclude Include="Common\Spoof.h" />
+    <ClInclude Include="Common\WorldToScreen.h" />
     <ClInclude Include="Features\Evade\Evade.h" />
     <ClInclude Include="Features\Evade\Spell\Spell.h" />
     <ClInclude Include="Features\Feature.h" />
     <ClInclude Include="Features\SkinChanger\Riot\GameClasses.h" />
     <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
     <ClInclude Include="Features\SkinChanger\Database\SkinDatabase.h" />
+    <ClInclude Include="Features\Visuals\Visuals.h" />
     <ClInclude Include="Hooks.h" />
     <ClInclude Include="Library\Encryption.h" />
     <ClInclude Include="Library\FNVHash.h" />
+    <ClInclude Include="Library\JSON.h" />
     <ClInclude Include="Library\kiero\kiero.h" />
     <ClInclude Include="Library\kiero\minhook\include\MinHook.h" />
     <ClInclude Include="Library\kiero\minhook\src\buffer.h" />
@@ -151,6 +156,7 @@
     <ClInclude Include="Library\imgui\imstb_rectpack.h" />
     <ClInclude Include="Library\imgui\imstb_textedit.h" />
     <ClInclude Include="Library\imgui\imstb_truetype.h" />
+    <ClInclude Include="Library\matrix\Matrix4x4.h" />
     <ClInclude Include="Library\vector\CRT.h" />
     <ClInclude Include="Library\vector\Vector.h" />
     <ClInclude Include="Library\vector\Vector2.h" />
@@ -163,7 +169,7 @@
     <ClInclude Include="Offsets\Skins.h" />
     <ClInclude Include="Offsets\World.h" />
     <ClInclude Include="Overlay\Menu.h" />
-    <ClInclude Include="Common\Player.h" />
+    <ClInclude Include="Common\Player\Player.h" />
     <ClInclude Include="Overlay\Render.h" />
   </ItemGroup>
   <ItemGroup>

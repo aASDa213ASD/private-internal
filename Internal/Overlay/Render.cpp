@@ -1,5 +1,7 @@
 #include "Render.h"
 
+#include "../Common/WorldToScreen.h"
+
 void Render::overlay()
 {
 	ImGuiIO io = ImGui::GetIO();
@@ -71,4 +73,50 @@ void Render::triangle(Vector2 point_a, Vector2 point_b, Vector2 point_c, ImColor
 void Render::filled_triangle(Vector2 point_a, Vector2 point_b, Vector2 point_c, ImColor color)
 {
 	draw_list->AddTriangleFilled(ImVec2(point_a.x, point_a.y), ImVec2(point_b.x, point_b.y), ImVec2(point_c.x, point_c.y), color);
+}
+
+float cubicEaseInOut(float t) {
+	return t < 0.5f ? 4.0f * t * t * t : 1.0f - std::pow(-2.0f * t + 2.0f, 3.0f) / 2.0f;
+}
+
+void Render::circle_w2s(const Vector3& world_position, ImColor color, float radius, int segments, float thickness)
+{
+	if (segments >= 200)
+		return;
+
+	static ImVec2 points[200];
+	Vector3 worldSpace;
+	Vector2 screenSpace;
+
+	float step = 6.2831f / segments; // PI * 2
+	float theta = 0.f;
+
+	ImColor colors[200];
+
+	for (int i = 0; i < segments; i++, theta += step) {
+		worldSpace = { world_position.x + radius * cos(theta), world_position.y, world_position.z - radius * sin(theta) };
+		screenSpace = WorldToScreen(worldSpace);
+
+		// Calculate gradient color based on theta (angle)
+		float hue = theta / (2 * 3.14159); // Normalize angle to [0, 1]
+		colors[i] = ImColor::HSV(hue, 1.f, 1.f); // Create color from HSV values
+
+		points[i].x = screenSpace.x;
+		points[i].y = screenSpace.y;
+	}
+
+	draw_list->_FringeScale = 5.0f;
+
+	for (int i = 0; i < segments - 1; ++i) {
+		draw_list->AddLine(points[i], points[i + 1], colors[i], thickness);
+	}
+
+	draw_list->AddLine(points[segments - 1], points[0], colors[segments - 1], thickness);
+
+	draw_list->_FringeScale = 1.0f;
+	/*
+	draw_list->_FringeScale = 10.0f;
+	draw_list->AddPolyline(points, segments, color, true, thickness);
+	draw_list->_FringeScale = 1.0f;
+	*/
 }

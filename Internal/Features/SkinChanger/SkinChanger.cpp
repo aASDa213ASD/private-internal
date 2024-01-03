@@ -35,3 +35,9 @@ void SkinChanger::change_skin(const char* model_name, int skin_id, uintptr_t pla
 	if (player)
 		player->change_skin(model_name, skin_id);
 }
+
+std::string* SkinChanger::change_name(uintptr_t player_address)
+{
+	const auto player = *reinterpret_cast<AIBaseCommon**>(memory.base + player_address);
+	return player ? player->get_name() : nullptr;
+}
