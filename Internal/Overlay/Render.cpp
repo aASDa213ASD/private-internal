@@ -75,12 +75,9 @@ void Render::filled_triangle(Vector2 point_a, Vector2 point_b, Vector2 point_c, 
 	draw_list->AddTriangleFilled(ImVec2(point_a.x, point_a.y), ImVec2(point_b.x, point_b.y), ImVec2(point_c.x, point_c.y), color);
 }
 
-float cubicEaseInOut(float t) {
-	return t < 0.5f ? 4.0f * t * t * t : 1.0f - std::pow(-2.0f * t + 2.0f, 3.0f) / 2.0f;
-}
-
-void Render::circle_w2s(const Vector3& world_position, ImColor color, float radius, int segments, float thickness)
+void Render::circle_w2s(const Vector3& world_position, ImColor color, float radius, int segments, float thickness, float glow)
 {
+	/*
 	if (segments >= 200)
 		return;
 
@@ -114,9 +111,69 @@ void Render::circle_w2s(const Vector3& world_position, ImColor color, float radi
 	draw_list->AddLine(points[segments - 1], points[0], colors[segments - 1], thickness);
 
 	draw_list->_FringeScale = 1.0f;
-	/*
+	
 	draw_list->_FringeScale = 10.0f;
 	draw_list->AddPolyline(points, segments, color, true, thickness);
 	draw_list->_FringeScale = 1.0f;
+	
 	*/
+
+	if (segments > 200)
+		return;
+
+	Vector3 world_space;
+	Vector2 screen_space;
+	static ImVec2 points[200];
+	const float angle_step = (M_PI * 2) / segments;
+	float angle = 0.f;
+
+	for (int i = 0; i < segments; i++, angle += angle_step) {
+		world_space = { world_position.x + radius * cos(angle), world_position.y, world_position.z - radius * sin(angle) };
+		screen_space = world_to_screen(world_space);
+
+		points[i].x = screen_space.x;
+		points[i].y = screen_space.y;
+	}
+
+	if (glow > 1.f)
+	{
+		ImColor glow_color = color;
+		glow_color.Value.w = 0.3f;
+
+		draw_list->_FringeScale = glow;
+		draw_list->AddPolyline(points, segments, glow_color, true, thickness);
+		draw_list->_FringeScale = 1.f;
+	}
+
+	draw_list->AddPolyline(points, segments, color, true, thickness);
+}
+
+void Render::filled_circle_w2s(const Vector3& world_position, ImColor color, float radius, int segments, float thickness)
+{
+	if (segments > 200)
+		return;
+
+	ImVec2 vertices[200];
+	Vector3 vertices_2[200];
+	bool vertices_valid[200];
+
+	float angle = 0;
+	const float angle_step = (M_PI * 2) / segments;
+
+	for (int i = 0; i <= segments; ++i, angle += angle_step)
+	{
+		Vector3 pos = Vector3(radius * cosf(angle) + world_position.x, world_position.y, radius * sinf(angle) + world_position.z);
+		Vector2 w2s_pos = world_to_screen(pos);
+		vertices_valid[i] = w2s_pos.x > 0 && w2s_pos.x < memory.viewport_width && w2s_pos.y > 0 && w2s_pos.y < memory.viewport_height;
+		vertices[i] = ImVec2(w2s_pos.x, w2s_pos.y);
+		vertices_2[i] = Vector3(w2s_pos.x, w2s_pos.y, 0);
+	}
+
+	for (int i = 0; i < segments; ++i)
+	{
+		if (vertices_2[i].Distance(vertices_2[i + 1]) > radius)
+			return;
+	}
+
+	draw_list->AddConvexPolyFilled(vertices, segments, color);
 }

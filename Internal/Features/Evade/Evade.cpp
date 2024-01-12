@@ -6,6 +6,7 @@
 #include "../../Common/Memory.h"
 #include "../../Library/VMT/VMTHook.h"
 #include "../../Offsets/Objects.h"
+#include "../../Offsets/Functions.h"
 #include "../../Overlay/Render.h"
 #include "Spell/Spell.h"
 #include <format>
@@ -28,7 +29,7 @@ void __fastcall on_cast(void* this_ptr, void* state, void* spell_cast_info) noex
 
 	/*
 	std::stringstream ss;
-	ss << std::hex << "This Pointer: 0x" << (reinterpret_cast<uint64_t>(this_ptr) - 0x11b8);
+	ss << std::hex << "This Pointer: 0x" << (reinterpret_cast<uint64_t>(this_ptr) - OnProcessSpellCast);
 	render.spell = ss.str();
 	*/
 
@@ -68,7 +69,7 @@ void __fastcall on_cast(void* this_ptr, void* state, void* spell_cast_info) noex
 	
 	for (auto& ally : memory.allies)
 	{
-		if (ally.address() == (reinterpret_cast<uint64_t>(this_ptr) - 0x11b8))
+		if (ally.address() == (reinterpret_cast<uint64_t>(this_ptr) - OnProcessSpellCast))
 		{
 			render.spell = std::format("Spell {} casted by {}", current_spell.name, ally.hero_name());
 
@@ -96,7 +97,7 @@ void WINAPI on_process_spell()
 	uint64_t _l = *reinterpret_cast<uint64_t*>(memory.base + LocalPlayer);
 
 	memory.vmt_on_process_spell = VMTHOnProcessSpellCast[0].Hook(
-		reinterpret_cast<void*>(static_cast<uint64_t>(_l + 0x11b8)), 29,
+		reinterpret_cast<void*>(static_cast<uint64_t>(_l + OnProcessSpellCast)), 29,
 		reinterpret_cast<uintptr_t>(&on_cast)
 	);
 

@@ -9,6 +9,7 @@
 class Visuals : public Feature {
 private:
 	std::string name = "Visuals";
+	float hue = 0.f;
 
 public:
 	void load() override;
@@ -16,5 +17,5 @@ public:
 	void unload() override;
 	const std::string& get_name() const override { return name; };
 
-	bool draw_attack_range = true;
+	bool track_enemies = true;
 };

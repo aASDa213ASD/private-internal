@@ -7,7 +7,7 @@
 #include "../Common/Memory.h"
 #include "../Offsets/World.h"
 
-static Vector2 WorldToScreen(const Vector3& pos)
+static Vector2 world_to_screen(const Vector3& pos)
 {
 	Matrix4x4 view_matrix		= *reinterpret_cast<Matrix4x4*>(memory.base + oViewProjMatrices);
 	Matrix4x4 projection_matrix	= *reinterpret_cast<Matrix4x4*>(memory.base + oViewProjMatrices + 0x40);
@@ -35,9 +35,6 @@ static Vector2 WorldToScreen(const Vector3& pos)
 				  + pos.y * view_proj_matrix.matrix[7] \
 				  + pos.z * view_proj_matrix.matrix[11]\
 				  + view_proj_matrix.matrix[15];
-
-	if (clip_coords.w < 0.1f)
-		return return_vec;
 
 	Vector3 M;
 	M.x = clip_coords.x / clip_coords.w;

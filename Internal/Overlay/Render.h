@@ -22,8 +22,9 @@ public:
 	void filled_circle(Vector2 position, ImColor color = ImColor(1.f, 1.f, 1.f, 1.f), float radius = 0.f, int segments = 0);
 	void triangle(Vector2 point_a, Vector2 point_b, Vector2 point_c, ImColor color = ImColor(1.f, 1.f, 1.f, 1.f), float thickness = 1.f);
 	void filled_triangle(Vector2 point_a, Vector2 point_b, Vector2 point_c, ImColor color = ImColor(1.f, 1.f, 1.f, 1.f));
+	void circle_w2s(const Vector3& world_position, ImColor color = ImColor(1.f, 1.f, 1.f, 1.f), float radius = 0, int segments = 0, float thickness = 1.f, float glow = 1.f);
+	void filled_circle_w2s(const Vector3& world_position, ImColor color = ImColor(1.f, 1.f, 1.f, 1.f), float radius = 0, int segments = 0, float thickness = 1.f);
 	void polygon(std::vector<Vector3> polygon);
-	void circle_w2s(const Vector3& world_position, ImColor color = ImColor(1.f, 1.f, 1.f, 1.f), float radius = 0, int segments = 0, float thickness = 3.f);
 	
 	std::string spell = "No spell";
 };

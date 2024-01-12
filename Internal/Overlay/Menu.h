@@ -9,6 +9,7 @@
 #include "../../Features/Visuals/Visuals.h"
 #include "../Features/SkinChanger/Database/SkinDatabase.h"
 #include "../../Common/Player/PlayerSpell.h"
+#include "../Common/WorldToMinimap.h"
 
 class Menu {
 	ImGuiWindowFlags window_flags = 0;
@@ -125,7 +126,52 @@ public:
 			if (visuals)
 				if (ImGui::BeginMenu("Visuals"))
 				{
-					ImGui::Checkbox("Attack Range", &visuals->draw_attack_range);
+					if (ImGui::BeginMenu("Players"))
+					{
+						for (auto& ally : memory.allies)
+						{
+							if (ImGui::BeginMenu(ally.hero_name().c_str()))
+							{
+								ImGui::Checkbox("Attack range", &ally.visuals.attack_range);
+								ImGui::SameLine();
+								ImGui::ColorEdit4("###Attack range color", (float*)&ally.visuals.attack_range_color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+								ImGui::Checkbox("Attack range RGB", &ally.visuals.attack_range_rgb);
+
+								ImGui::Checkbox("Name", &ally.visuals.hero_name);
+								ImGui::SameLine();
+								ImGui::ColorEdit4("###Name color", (float*)&ally.visuals.hero_name_color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+								ImGui::Checkbox("Name RGB", &ally.visuals.hero_name_rgb);
+								ImGui::EndMenu();
+							}
+						}
+
+						ImGui::Separator();
+
+						for (auto& enemy : memory.enemies)
+						{
+							if (ImGui::BeginMenu(enemy.hero_name().c_str()))
+							{
+								ImGui::Checkbox("Attack range", &enemy.visuals.attack_range);
+								ImGui::SameLine();
+								ImGui::ColorEdit4("###Attack range color", (float*)&enemy.visuals.attack_range_color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+								ImGui::Checkbox("Attack range RGB", &enemy.visuals.attack_range_rgb);
+
+								ImGui::Checkbox("Name", &enemy.visuals.hero_name);
+								ImGui::SameLine();
+								ImGui::ColorEdit4("###Name color", (float*)&enemy.visuals.hero_name_color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+								ImGui::Checkbox("Name RGB", &enemy.visuals.hero_name_rgb);
+								ImGui::EndMenu();
+							}
+						}
+
+						ImGui::EndMenu();
+					}
+					if (ImGui::BeginMenu("Minimap"))
+					{
+						ImGui::Checkbox("Track enemies", &visuals->track_enemies);
+						ImGui::EndMenu();
+					}
+
 					ImGui::EndMenu();
 				}
 

@@ -33,7 +33,7 @@ public:
 	WNDPROC window_procedure = nullptr;
 	std::once_flag init_flag;
 
-	Visuals* visuals;
+	Visuals* visuals = nullptr;
 	
 	void install();
 	void uninstall();

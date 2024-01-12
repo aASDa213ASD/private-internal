@@ -43,7 +43,7 @@ __declspec(safebuffers) static void WINAPI DllAttach([[maybe_unused]] LPVOID lp)
 
 	//featurectl.load_feature(std::make_unique<Evade>());
 	featurectl.load_feature(std::make_unique<SkinChanger>());
-	//featurectl.load_feature(std::make_unique<Visuals>());
+	featurectl.load_feature(std::make_unique<Visuals>());
 
 	hooks.install();
 

@@ -126,6 +126,7 @@
     <ClInclude Include="Common\Memory.h" />
     <ClInclude Include="Common\Player\PlayerSpell.h" />
     <ClInclude Include="Common\Spoof.h" />
+    <ClInclude Include="Common\WorldToMinimap.h" />
     <ClInclude Include="Common\WorldToScreen.h" />
     <ClInclude Include="Features\Evade\Evade.h" />
     <ClInclude Include="Features\Evade\Spell\Spell.h" />
@@ -134,6 +135,8 @@
     <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
     <ClInclude Include="Features\SkinChanger\Database\SkinDatabase.h" />
     <ClInclude Include="Features\Visuals\Visuals.h" />
+    <ClInclude Include="Common\Player\PlayerVisuals.h" />
+    <ClInclude Include="Features\Visuals\VisualsHelper.h" />
     <ClInclude Include="Hooks.h" />
     <ClInclude Include="Library\Encryption.h" />
     <ClInclude Include="Library\FNVHash.h" />

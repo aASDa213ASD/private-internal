@@ -29,10 +29,12 @@ void Memory::initialize(bool with_players)
 				allies.emplace_back(Player(player_address));
 		}
 
+		/*
 		for (auto& ally : allies)
 		{
 			ally.load_spelldb();
 		}
+		*/
 	}
 }
 

@@ -9,6 +9,9 @@
 
 using namespace nlohmann;
 
+typedef float(__fastcall* FnGetBoundingRadius)(uint64_t* entity);
+typedef bool(__fastcall* FnIsAlive)(uint64_t* entity);
+
 Player::Player(uintptr_t pointer = NULL)
 {
 	if (pointer)
@@ -71,6 +74,12 @@ float Player::attack_range()
 	return *reinterpret_cast<float*>(_pointer + AttackRange);
 }
 
+float Player::bounding_radius()
+{
+	FnGetBoundingRadius get_bounding_radius = reinterpret_cast<FnGetBoundingRadius>(memory.base + fGetBoundingRadius);
+	return get_bounding_radius((uint64_t*)_pointer);
+}
+
 int Player::team()
 {
 	return this->_team;
@@ -84,6 +93,17 @@ bool Player::is_enemy_to(Player player)
 bool Player::is_ally_to(Player player)
 {
 	return (_team == player.team());
+}
+
+bool Player::is_alive()
+{
+	FnIsAlive is_alive = reinterpret_cast<FnIsAlive>(memory.base + fIsAlive);
+	return is_alive((uint64_t*)_pointer);
+}
+
+bool Player::is_visible()
+{
+	return *(bool*)(_pointer + IsVisible);
 }
 
 Vector3 Player::position()
